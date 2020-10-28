@@ -2,7 +2,6 @@
 
 set -ex
 
-# bundle exec rake db:create
-# bundle exec rake db:migrate
+rake db:migrate
 
 exec "$@"

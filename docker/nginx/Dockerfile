@@ -22,7 +22,7 @@ COPY public public/
 
 # Copy  config template
 
-COPY docker/web/nginx.conf /tmp/docker.nginx
+COPY docker/nginx/nginx.conf /tmp/docker.nginx
 
 RUN envsubst '$RAILS_ROOT' < /tmp/docker.nginx > /etc/nginx/conf.d/default.conf
 

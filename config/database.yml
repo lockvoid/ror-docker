@@ -12,6 +12,4 @@ test:
   database: <%= Rails.application.class.parent_name.underscore %>_test
 
 production:
-  <<: *default
-  database: <%= Rails.application.class.parent_name.underscore %>_production
-
+  url: <%= ENV["DATABASE_URL"] %>

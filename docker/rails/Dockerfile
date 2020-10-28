@@ -106,7 +106,7 @@ COPY --from=builder ${APP_ROOT} ${APP_ROOT}
 RUN rm -rf ${APP_ROOT}/node_modules && \
     rm -rf ${APP_ROOT}/tmp
 
-# Drop the root user and make the content of /opt/app-root owned by user 1001
+# Drop the root user and make the content of app root owned by user 1001
 
 RUN chown -R 1001:0 ${APP_ROOT} && chmod -R ug+rwx ${APP_ROOT}
 

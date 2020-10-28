@@ -1,0 +1,36 @@
+version: '3.4'
+
+x-services:
+  app_base: &app_base
+    build:
+      context: .
+      dockerfile: ./docker/rails/Dockerfile
+    environment:
+      - RAILS_ENV=production
+      - REDIS_URL=redis://h:p33e8d990db9b48ddabcafee42448f46ca621e055db5e5af3edfbf4433c9431dc@ec2-54-155-120-174.eu-west-1.compute.amazonaws.com:27969
+      - DATABASE_URL=postgres://mdkqkzfwfjgexn:081cb387a9694a7044cd79209cd3c57f53a87c97c43da0a9a30ad50245ba4fb1@ec2-54-247-78-30.eu-west-1.compute.amazonaws.com:5432/d7n2cg2pligaoj
+    volumes:
+      - .:/srv/app
+      - /srv/app/vendor/bundle
+      - /srv/app/public
+    entrypoint: "./docker-entrypoint.sh"
+
+services:
+  app:
+    <<: *app_base
+    command: puma
+    ports:
+      - "3000:3000"
+
+  worker:
+    <<: *app_base
+    command: sidekiq
+
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    depends_on:
+      - app
+    ports:
+      - 80:80
