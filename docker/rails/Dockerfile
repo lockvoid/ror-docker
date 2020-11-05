@@ -5,10 +5,11 @@ FROM registry.access.redhat.com/ubi8/ubi:8.2 as base
 # Setup defaults
 
 ENV APP_ROOT="/srv/app"
-ENV NODEJS_VERSION="12"
-ENV RUBY_VERSION="2.6"
 ENV GEM_HOME="/usr/local/bundle"
+ENV NODEJS_VERSION="12"
 ENV PATH="$GEM_HOME/bin:$GEM_HOME/gems/bin:$PATH"
+ENV RUBY_VERSION="2.6"
+ENV SECRET_KEY_BASE=dummy
 
 # == Stage: Build
 
