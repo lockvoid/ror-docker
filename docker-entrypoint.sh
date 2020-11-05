@@ -2,6 +2,6 @@
 
 set -ex
 
-rake db:migrate
+# rake db:migrate
 
 exec "$@"

@@ -14,18 +14,23 @@ x-services:
       - .:/srv/app
       - /srv/app/vendor/bundle
       - /srv/app/public
+    tmpfs:
+      - /srv/app/tmp
+      - /srv/app/tmp/pids
+      - /srv/app/tmp/sockets
+      - /srv/app/tmp/cache
     entrypoint: "./docker-entrypoint.sh"
 
 services:
   app:
     <<: *app_base
-    command: puma
+    command: bundle exec puma
     ports:
       - "3000:3000"
 
   worker:
     <<: *app_base
-    command: sidekiq
+    command: bundle exec sidekiq
 
   web:
     build:
