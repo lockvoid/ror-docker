@@ -46,6 +46,14 @@ RUN yum -y module enable ruby:${RUBY_VERSION} && \
 RUN gem install bundler && \
     npm install yarn --global
 
+# Install application dependencies
+
+COPY Gemfile Gemfile.lock ${APP_ROOT}/
+RUN cd ${APP_ROOT}; bundle install
+
+COPY package.json yarn.lock ${APP_ROOT}/
+RUN cd ${APP_ROOT}; yarn install
+
 # Copy application files
 
 COPY . ${APP_ROOT}/
@@ -53,11 +61,6 @@ COPY . ${APP_ROOT}/
 # Go to application
 
 WORKDIR ${APP_ROOT}
-
-# Install application dependencies
-
-RUN bundle install
-RUN yarn install
 
 # Compile application assets (Rails can't precompile assets without SECRET_KEY_BASE) and cleanup
 
