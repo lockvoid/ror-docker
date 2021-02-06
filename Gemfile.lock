@@ -84,7 +84,7 @@ GIT
       thor (~> 1.0)
 
 GEM
-  remote: https://rubygems.org/
+  remote: http://mirror.ops.rhcloud.com/mirror/ruby/
   specs:
     aasm (5.0.8)
       concurrent-ruby (~> 1.0)
@@ -358,7 +358,7 @@ DEPENDENCIES
   pundit (~> 2.0.1)
   rails!
   rails-i18n (~> 6.0.0)
-  redis (~> 4.2.1)
+  redis (~> 4.2.2)
   redis-namespace (~> 1.8.0)
   ruby-prof (~> 0.17)
   searchkick (~> 4.1.1)
